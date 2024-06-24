@@ -51,7 +51,7 @@ valid_colours = {
 	"SILVER":    "37",
 	"BROWN":     "40",
 	"GREEN":     "32",
-	"ORANGE": 	 "33",
+	"ORANGE":    "33",
 	"TURQUOISE": "94",
 	"BLACK":     "40",
 	"GOLD":      "93",
@@ -111,15 +111,15 @@ def validate_reg(registration: Dict[str, str]) -> bool:
 	# Thanks to Github User Danielrbradley for the validation RegEx
 	# https://gist.github.com/danielrbradley/7567269?permalink_comment_id=3796652#gistcomment-3796652
 	pattern = r"""^((?P<Current>[A-Z]{2}[0-9]{2}\s?[A-Z]{3})|
-					(?P<Prefix>[A-Z][0-9]{1,3}\s?[A-Z]{3})|
-					(?P<Suffix>[A-Z]{3}\s?[0-9]{1,3}[A-Z])|
-					(?P<DatelessLongNumberPrefix>[0-9]{1,4}\s?[A-Z]{1,2})|
-					(?P<DatelessShortNumberPrefix>[0-9]{1,3}\s?[A-Z]{1,3})|
-					(?P<DatelessLongNumberSuffix>[A-Z]{1,2}\s?[0-9]{1,4})|
-					(?P<DatelessShortNumberSuffix>[A-Z]{1,3}\s?[0-9]{1,3})|
-					(?P<DatelessNorthernIreland>[A-Z]{1,3}\s?[0-9]{1,4})|
-					(?P<DiplomaticPlate>[0-9]{3}\s?[DX]{1}\s?[0-9]{3}))$ 
-				"""
+		        (?P<Prefix>[A-Z][0-9]{1,3}\s?[A-Z]{3})|
+		        (?P<Suffix>[A-Z]{3}\s?[0-9]{1,3}[A-Z])|
+		        (?P<DatelessLongNumberPrefix>[0-9]{1,4}\s?[A-Z]{1,2})|
+		        (?P<DatelessShortNumberPrefix>[0-9]{1,3}\s?[A-Z]{1,3})|
+		        (?P<DatelessLongNumberSuffix>[A-Z]{1,2}\s?[0-9]{1,4})|
+			(?P<DatelessShortNumberSuffix>[A-Z]{1,3}\s?[0-9]{1,3})|
+			(?P<DatelessNorthernIreland>[A-Z]{1,3}\s?[0-9]{1,4})|
+			(?P<DiplomaticPlate>[0-9]{3}\s?[DX]{1}\s?[0-9]{3}))$ 
+		    """
 	return bool(re.search(pattern, internal_reg, re.VERBOSE))
 
 def make_request(request_payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -139,13 +139,12 @@ def make_request(request_payload: Dict[str, Any]) -> Dict[str, Any]:
 
 	Wherein;
 		Vehicles older than 40 years
-    	Mobile cranes and Pumps
-    	Road rollers, Works trucks and Digging machines
-    	Agricultural machines and Mowing machines
-    	Snowploughs and gritting vehicles
-    	Electric vehicles
-    	Steam vehicles
-
+    		Mobile cranes and Pumps
+    		Road rollers, Works trucks and Digging machines
+    		Agricultural machines and Mowing machines
+    		Snowploughs and gritting vehicles
+    		Electric vehicles
+    		Steam vehicles
 	are exempt from paying vehicle tax, and will have a status of "No results returned"
 
 	'''
@@ -177,20 +176,20 @@ def make_request(request_payload: Dict[str, Any]) -> Dict[str, Any]:
 		print(f"{key}: \033[90m{data}\033[0m")
 
 
-	return {"registrationNumber":  json_response.get("registrationNumber", None),
-			"taxStatus": 		   json_response.get("taxStatus", None),
+	return {"registrationNumber":          json_response.get("registrationNumber", None),
+			"taxStatus": 	       json_response.get("taxStatus", None),
 			"taxDueDate":          json_response.get("taxDueDate", None),
-   			"motStatus": 		   json_response.get("motStatus", None),
-			"make": 			   json_response.get("make", None),
+   			"motStatus": 	       json_response.get("motStatus", None),
+			"make": 	       json_response.get("make", None),
    			"yearOfManufacture":   json_response.get("yearOfManufacture", None),
    			"engineCapacity":      json_response.get("engineCapacity", None),
    			"co2Emissions":        json_response.get("co2Emissions", None),
-			"fuelType": 		   json_response.get("fuelType", None),
+			"fuelType": 	       json_response.get("fuelType", None),
 			"markedForExport":     json_response.get("markedForExport", None),
-   			"colour": 			   json_response.get("colour", None),
-   			"typeApproval": 	   json_response.get("typeApproval", None),
+   			"colour": 	       json_response.get("colour", None),
+   			"typeApproval":        json_response.get("typeApproval", None),
    			"dateOfLastV5CIssued": json_response.get("dateOfLastV5CIssued", None),
-			"motExpiryDate": 	   json_response.get("motExpiryDate", None)
+			"motExpiryDate":       json_response.get("motExpiryDate", None)
 	}
 
 def display_response(returned_data: Dict[str, Any]) -> None:
@@ -208,25 +207,25 @@ def display_response(returned_data: Dict[str, Any]) -> None:
 	terminal_green = {"Valid", "Taxed", "No results returned", "SORN"}
 	terminal_red = {"Invalid", "Untaxed", "Not valid"}
 	ignore = {"engineCapacity", "markedForExport", "typeApproval", "co2Emissions",
-			  "dateOfLastV5CIssued", "motExpiryDate", "taxDueDate"}
+		  "dateOfLastV5CIssued", "motExpiryDate", "taxDueDate"}
 
 	print("\n\033[13mSummary -- \033[0m")
 	for element, value in returned_data.items():				# Print out most relevant stuff
-		if element in ignore:									# Strip fields we don't care about
+		if element in ignore:						# Strip fields we don't care about
 			continue
 
-		if value in terminal_green:								# If the result is positive
-			if value == "No results returned":					# ("Valid", "No results returned (Exempt)", or "SORN"ed)
+		if value in terminal_green:					# If the result is positive
+			if value == "No results returned":			# ("Valid", "No results returned (Exempt)", or "SORN"ed)
 				print(f"\033[92m{element}: MOT Exempt\033[0m")	# Then we print this text as Green \033[92m
 			else:
 				print(f"\033[92m{element}: {value}\033[0m")
-		elif value in terminal_red:								# If the result is negative
+		elif value in terminal_red:					# If the result is negative
 			if returned_data.get("taxStatus") == "SORN":		# ("Not valid", "No MOT and *NOT* SORNed")
-				print(f"\033[92m{element}: SORN\033[0m")		# Then this shall instead be Red \033[31m
+				print(f"\033[92m{element}: SORN\033[0m")	# Then this shall instead be Red \033[31m
 			else:
 				print(f"\033[31m{element}: {value}\033[0m")
-		elif element == "colour":								# The DVLA only officially supports 18 unique colours
-			if value in valid_colours:							# We can therefore support hard-coded colours in the terminal
+		elif element == "colour":					# The DVLA only officially supports 18 unique colours
+			if value in valid_colours:				# We can therefore support hard-coded colours in the terminal
 				print(f"\033[{valid_colours[value]}m{element}: {value}\033[0m\n")
 			else:
 				print(f"\033[33m{element}: {value}\033[0m")
@@ -252,7 +251,6 @@ def main(internal_payload: Dict[str, str]) -> None:
 		sys.exit(1)
 
 	returned_data = make_request(internal_payload)
-
 	display_response(returned_data)
 
 
