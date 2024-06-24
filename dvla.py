@@ -96,7 +96,7 @@ def get_api_key() -> str:
 	if not keyring.get_credential("DVLA-API-KEY", temp_user).password:
 		raise TypeError("Could not find API key stored in keyring")
 
-	del temp_key, temp_user
+	del temp_key
 	return keyring.get_credential("DVLA-API-KEY", temp_user).password
 
 def validate_reg(registration: Dict[str, str]) -> bool:
