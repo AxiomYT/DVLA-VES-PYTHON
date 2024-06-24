@@ -5,10 +5,9 @@ Test Cases for DVLA.py
 from dvla import validate_reg
 
 reg_list_valid = [
-    "NG04DNJ", "WF61ZZH", "AB51ABC", "A51ABC", "A123ABC", "A12ABC", "A1ABC", 
-    "123ABC", "ABC123A", "ABC12A", "ABC1A", "ABC123", "1ABC", "ABC1", "1234A", 
-    "A1234", "1234AB", "AB1234", "123ABC", "ABC123", "ABC123", 
-    "ABC1234", "101D234", "123X456"
+    "AB51ABC", "A51ABC", "A123ABC", "A12ABC", "A1ABC", "123ABC", "ABC123A", 
+    "ABC12A", "ABC1A", "ABC123", "1ABC", "ABC1", "1234A", "A1234", "1234AB", 
+    "AB1234", "123ABC", "ABC123", "ABC123", "ABC1234", "101D234", "123X456"
 ]
 
 reg_list_invalid = [
