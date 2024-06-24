@@ -176,20 +176,20 @@ def make_request(request_payload: Dict[str, Any]) -> Dict[str, Any]:
 		print(f"{key}: \033[90m{data}\033[0m")
 
 
-	return {"registrationNumber":          json_response.get("registrationNumber", None),
-			"taxStatus": 	       json_response.get("taxStatus", None),
-			"taxDueDate":          json_response.get("taxDueDate", None),
-   			"motStatus": 	       json_response.get("motStatus", None),
-			"make": 	       json_response.get("make", None),
-   			"yearOfManufacture":   json_response.get("yearOfManufacture", None),
-   			"engineCapacity":      json_response.get("engineCapacity", None),
-   			"co2Emissions":        json_response.get("co2Emissions", None),
-			"fuelType": 	       json_response.get("fuelType", None),
-			"markedForExport":     json_response.get("markedForExport", None),
-   			"colour": 	       json_response.get("colour", None),
-   			"typeApproval":        json_response.get("typeApproval", None),
-   			"dateOfLastV5CIssued": json_response.get("dateOfLastV5CIssued", None),
-			"motExpiryDate":       json_response.get("motExpiryDate", None)
+	return {"registrationNumber":  json_response.get("registrationNumber", None),
+		"taxStatus": 	       json_response.get("taxStatus", None),
+		"taxDueDate":          json_response.get("taxDueDate", None),
+   		"motStatus": 	       json_response.get("motStatus", None),
+		"make": 	       json_response.get("make", None),
+   		"yearOfManufacture":   json_response.get("yearOfManufacture", None),
+   		"engineCapacity":      json_response.get("engineCapacity", None),
+   		"co2Emissions":        json_response.get("co2Emissions", None),
+		"fuelType": 	       json_response.get("fuelType", None),
+		"markedForExport":     json_response.get("markedForExport", None),
+   		"colour": 	       json_response.get("colour", None),
+   		"typeApproval":        json_response.get("typeApproval", None),
+   		"dateOfLastV5CIssued": json_response.get("dateOfLastV5CIssued", None),
+		"motExpiryDate":       json_response.get("motExpiryDate", None)
 	}
 
 def display_response(returned_data: Dict[str, Any]) -> None:
